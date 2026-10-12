@@ -1,4 +1,4 @@
-name: SSecurity Scans
+name: Security Scans
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkmarx AST Github Action
         uses: Checkmarx/ast-github-action@2.3.45
         with:
-          project_name: 'cx-devsecops/payment-service-testbed'
+          project_name: 'cx-devsecops/poc-compartamos-payment-service-testbed'
           cx_tenant: ${{ secrets.CX_TENANT }}
           base_uri: ${{ secrets.CX_BASE_URI }}
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
