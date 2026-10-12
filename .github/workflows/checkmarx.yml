@@ -21,10 +21,27 @@ jobs:
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           branch: ${{ github.ref }}
-          scan_params: ' --report-format sbom --sast-incremental=false'
+          scan_params: '--scan-types sast,sca,api-security,iac-security --report-format sbom --sast-incremental=false'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v7.0.2
         with:
           name: cx_result_sbom.json
           path: '.'
+
+  checkmarx-secrets-scan:
+    runs-on: ubuntu-latest  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Checkmarx AST Github Action
+        uses: Checkmarx/ast-github-action@2.3.45
+        with:
+          project_name: 'cx-devsecops/poc-compartamos-payment-service-testbed'
+          cx_tenant: ${{ secrets.CX_TENANT }}
+          base_uri: ${{ secrets.CX_BASE_URI }}
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          branch: ${{ github.ref }}
+          scan_params: '--scan-types scs --scs-engines secret-detection--threshold "sscs-secret-detection-critical=1; sscs-secret-detection-high=1"'
