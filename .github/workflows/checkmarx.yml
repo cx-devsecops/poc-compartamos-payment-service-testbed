@@ -19,7 +19,7 @@ jobs:
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           branch: ${{ github.ref }}
-          scan_params: ' --report-format sbom'
+          scan_params: ' --report-format sbom --sast-incremental=false'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v7.0.2
