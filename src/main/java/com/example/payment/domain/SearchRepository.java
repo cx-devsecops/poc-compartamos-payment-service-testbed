@@ -16,13 +16,13 @@ public class SearchRepository {
 
     public List<Map<String, Object>> findByStatusAndMerchant(String status, String merchant) {
         String sql = "SELECT id, merchant_id, amount, currency, status FROM payments "
-                + "WHERE status = '" + status + "' AND merchant_id = '" + merchant + "'";
+            + "WHERE status = '" + status + "' AND merchant_id = '" + merchant + "'";
         return jdbc.queryForList(sql);
     }
 
     public List<Map<String, Object>> findForPortal(String status, String merchant) {
         String sql = "SELECT id, merchant_id, amount, currency, status FROM payments "
-                + "WHERE status = ? AND merchant_id = ?";
-        return jdbc.queryForList(sql, status, merchant);
+            + "WHERE status = '" + status + "' AND merchant_id = '" + merchant + "'";
+        return jdbc.queryForList(sql);
     }
 }
